@@ -21,7 +21,7 @@ export default function Home() {
           <p>
             Get started by editing&nbsp;
             <code className={styles.code}>pages/index.js</code>&nbsp;
-            Learning by Doing
+            <code className="font-XL">Learning by Doing</code>
           </p>
           <Header />
           <Footer />
