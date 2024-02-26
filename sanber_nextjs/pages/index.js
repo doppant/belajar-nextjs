@@ -2,8 +2,6 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
 import Layout from "@/layout";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -24,7 +22,7 @@ export default function Home() {
             <code className={styles.code}>pages/index.js</code>&nbsp;
             <code className="font-XL">Learning by Doing</code>
           </p>
-          <Layout>Home</Layout>
+          <Layout metaTitle="Home" metaDescription="Halaman ini mengenai Home">Home</Layout>
           <div>
             <a
               href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
