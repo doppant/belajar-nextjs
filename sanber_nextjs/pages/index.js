@@ -3,10 +3,18 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import Layout from "@/layout";
+import { useEffect } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  useEffect(()=>{
+    fetch("/api/hello")
+      .then((res) => res.json())
+      .then((res) => console.log("response =>", res))
+      .catch((err) => console.log("err =>", err))
+  })
+
   return (
     <>
       <Head>
