@@ -2,10 +2,11 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import Layout from "@/layout";
 import { useEffect } from "react";
+import dynamic from "next/dynamic";
 
 const inter = Inter({ subsets: ["latin"] });
+const LayoutComponent = dynamic(() => import('@/layout'))
 
 export default function Home() {
   useEffect(()=>{
@@ -30,7 +31,7 @@ export default function Home() {
             <code className={styles.code}>pages/index.js</code>&nbsp;
             <code className="font-XL">Learning by Doing</code>
           </p>
-          <Layout metaTitle="Home" metaDescription="Halaman ini mengenai Home">Home</Layout>
+          <LayoutComponent metaTitle="Home" metaDescription="Halaman ini mengenai Home">Home</LayoutComponent>
           <div>
             <a
               href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
