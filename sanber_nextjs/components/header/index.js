@@ -14,6 +14,12 @@ function Header() {
       <li>
         <Link href="/users">Users</Link>
       </li>
+      <li>
+        <Link href="/notes">Notes</Link>
+      </li>
+      <li>
+        <Link href="/post">Post</Link>
+      </li>
     </ul>
   </div>
 }
