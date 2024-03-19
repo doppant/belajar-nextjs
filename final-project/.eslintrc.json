@@ -13,6 +13,8 @@
     "react/jsx-props-no-spreading": "off",
     "import/no-unresolved": "off",
     "react/react-in-jsx-scope": "off",
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off",
     "no-tabs": 0,
     "implicit-arrow-linebreak": "off",
     "import/prefer-default-export": "off",
