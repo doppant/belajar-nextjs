@@ -1,8 +1,8 @@
-import Header from './Header';
-import Footer from './Footer';
-import Head from 'next/head';
+import Head from "next/head";
+import Header from "./Header";
+import Footer from "./Footer";
 
-const Layout = ({ children, metaTitle }) => {
+function Layout({ children, metaTitle }) {
   return (
     <div>
       <Head>
@@ -15,6 +15,6 @@ const Layout = ({ children, metaTitle }) => {
       <Footer />
     </div>
   );
-};
+}
 
 export default Layout;

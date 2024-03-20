@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
-import Cookies from 'js-cookie';
-import Avatar from 'react-avatar';
-import { HeartIcon, HeartIcon as HeartIconOutline } from '@heroicons/react/outline';
-import { HeartIcon as HeartIconSolid } from '@heroicons/react/solid';
-import { useQueries } from '@/hooks/UseQueries';
-import { useMutation } from '@/hooks/UseMutation';
+import { useState, useEffect } from "react";
+import Cookies from "js-cookie";
+import Avatar from "react-avatar";
+import { HeartIcon, HeartIcon as HeartIconOutline } from "@heroicons/react/outline";
+import { HeartIcon as HeartIconSolid } from "@heroicons/react/solid";
+import { useQueries } from "@/hooks/UseQueries";
+import { useMutation } from "@/hooks/UseMutation";
 
-const ShowPost = () => {
+function ShowPost() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -22,13 +22,13 @@ const ShowPost = () => {
           headers: { Authorization: `Bearer ${Cookies.get("user_token")}` },
         });
         if (!response.ok) {
-          throw new Error('Failed to fetch data');
+          throw new Error("Failed to fetch data");
         }
         const data = await response.json();
         setPosts(data.data);
         setLoading(false);
-      } catch (error) {
-        console.error('Error fetching data:', error);
+      } catch (err) {
+        console.error("Error fetching data:", err);
         setError(true);
         setLoading(false);
       }
@@ -40,20 +40,20 @@ const ShowPost = () => {
   const handleLikeToggle = async (postId, isLiked) => {
     try {
       if (!likePost || !unlikePost) {
-        console.error('Mutation functions are not available.');
+        console.error("Mutation functions are not available.");
         return;
       }
 
       const mutationFunction = isLiked ? unlikePost : likePost;
 
       await mutationFunction({
-        url: `https://paace-f178cafcae7b.nevacloud.io/api/${isLiked ? 'un' : ''}likes/post/${postId}`,
-        method: 'POST',
+        url: `https://paace-f178cafcae7b.nevacloud.io/api/${isLiked ? "un" : ""}likes/post/${postId}`,
+        method: "POST",
         headers: { Authorization: `Bearer ${Cookies.get("user_token")}` },
       });
 
       // Update posts data after successful like/unlike
-      const updatedPosts = posts.map(post => {
+      const updatedPosts = posts.map((post) => {
         if (post.id === postId) {
           return {
             ...post,
@@ -64,35 +64,35 @@ const ShowPost = () => {
         return post;
       });
       setPosts(updatedPosts);
-    } catch (error) {
-      console.error('Error:', error);
+    } catch (err) {
+      console.error("Error:", err);
     }
   };
 
   const handleEditPost = async (postId) => {
     // Implement edit post logic here
-    console.log('Edit post:', postId);
+    console.log("Edit post:", postId);
   };
 
   const handleDeletePost = async (postId) => {
     try {
       const response = await fetch(`https://paace-f178cafcae7b.nevacloud.io/api/post/delete/${postId}`, {
-        method: 'DELETE',
+        method: "DELETE",
         headers: { Authorization: `Bearer ${Cookies.get("user_token")}` },
       });
 
       if (!response.ok) {
-        throw new Error('Failed to delete post');
+        throw new Error("Failed to delete post");
       }
 
       // Handle success
-      console.log('Post deleted successfully');
+      console.log("Post deleted successfully");
 
       // Update posts data after successful deletion
-      const updatedPosts = posts.filter(post => post.id !== postId);
+      const updatedPosts = posts.filter((post) => post.id !== postId);
       setPosts(updatedPosts);
-    } catch (error) {
-      console.error('Error deleting post:', error);
+    } catch (err) {
+      console.error("Error deleting post:", err);
     }
   };
 
@@ -113,7 +113,7 @@ const ShowPost = () => {
             <div className="flex items-center justify-between mb-4">
               <Avatar
                 name={post.user ? post.user.name : "Unknown User"}
-                size='50'
+                size="50"
                 className="mr-2"
               />
               <div>
@@ -122,7 +122,7 @@ const ShowPost = () => {
               </div>
               {post.is_own_post && (
                 <div className="relative">
-                  <button onClick={() => handleToggleDropdown(post.id)} className="focus:outline-none">
+                  <button type="button" onClick={() => handleToggleDropdown(post.id)} className="focus:outline-none">
                     <svg className="h-6 w-6 text-gray-400 hover:text-gray-600 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
                     </svg>
@@ -130,8 +130,8 @@ const ShowPost = () => {
                   {showDropdown && selectedPostId === post.id && (
                     <div className="absolute right-0 mt-2 w-24 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                       <div className="py-1">
-                        <button onClick={() => handleEditPost(post.id)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Edit</button>
-                        <button onClick={() => handleDeletePost(post.id)} className="block px-4 py-2 text-sm text-red-700 hover:bg-red-100 hover:text-red-900" role="menuitem">Delete</button>
+                        <button type="button" onClick={() => handleEditPost(post.id)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Edit</button>
+                        <button type="button" onClick={() => handleDeletePost(post.id)} className="block px-4 py-2 text-sm text-red-700 hover:bg-red-100 hover:text-red-900" role="menuitem">Delete</button>
                       </div>
                     </div>
                   )}
@@ -144,18 +144,20 @@ const ShowPost = () => {
             </div>
             {/* Bagian bawah card */}
             <div className="flex justify-between">
-              <button 
+              <button
+                type="button"
                 className="bg-blue-500 text-white px-4 py-2 rounded-md"
                 onClick={() => handleLikeToggle(post.id, post.is_like_post)}
               >
                 {post.is_like_post ? (
-                  <HeartIconSolid className="h-5 w-5 mr-2 inline-block" /> 
+                  <HeartIconSolid className="h-5 w-5 mr-2 inline-block" />
                 ) : (
                   <HeartIconOutline className="h-5 w-5 mr-2 inline-block" />
                 )}
                 {post.likes_count}
               </button>
-              <button 
+              <button
+                type="button"
                 className="bg-green-500 text-white px-4 py-2 rounded-md"
               >
                 Replies {post.replies_count}
@@ -166,6 +168,6 @@ const ShowPost = () => {
       ))}
     </div>
   );
-};
+}
 
 export default ShowPost;

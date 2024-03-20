@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { Menu } from '@heroicons/react/outline';
-import Cookies from 'js-cookie';
-import { useQueries } from '@/hooks/UseQueries';
-import { useMutation } from '@/hooks/UseMutation';
-import Router from 'next/router';
-import Avatar from 'react-avatar';
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { Menu } from "@heroicons/react/outline";
+import Cookies from "js-cookie";
+import Router from "next/router";
+import Avatar from "react-avatar";
+import { useQueries } from "@/hooks/UseQueries";
+import { useMutation } from "@/hooks/UseMutation";
 
-const Header = () => {
+function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { data } = useQueries({
@@ -17,8 +17,8 @@ const Header = () => {
   const { mutate } = useMutation();
 
   useEffect(() => {
-    const cookieLogin = Cookies.get('isLoggedIn');
-    if (cookieLogin === 'true') {
+    const cookieLogin = Cookies.get("isLoggedIn");
+    if (cookieLogin === "true") {
       setIsLoggedIn(true);
     }
   }, []);
@@ -34,14 +34,14 @@ const Header = () => {
       headers: {
         Authorization: `Bearer ${Cookies.get("user_token")}`,
       },
-    })
+    });
     if (!result.success) {
-      console.log("gagal logout")
+      console.log("gagal logout");
     } else {
-      Cookies.remove('isLoggedIn');
-      Cookies.remove('user_token');
+      Cookies.remove("isLoggedIn");
+      Cookies.remove("user_token");
       setIsLoggedIn(false);
-      Router.push('/login')
+      Router.push("/login");
     }
   };
 
@@ -52,13 +52,14 @@ const Header = () => {
         {isLoggedIn && (
           <div className="relative">
             <button
+              type="button"
               className="text-white focus:outline-none"
               onClick={toggleDropdown}
             >
               <Avatar
                 name={data && data.data ? data.data.name : ""}
                 size={50}
-                round={true}
+                round
               />
             </button>
             {isDropdownOpen && (
@@ -80,6 +81,7 @@ const Header = () => {
                   </li>
                   <li>
                     <button
+                      type="button"
                       className="block w-full text-left py-2 px-4 text-gray-800 hover:bg-gray-200"
                       onClick={handleLogout}
                     >
@@ -94,6 +96,6 @@ const Header = () => {
       </div>
     </header>
   );
-};
+}
 
 export default Header;

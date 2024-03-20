@@ -1,18 +1,18 @@
-import { useState } from 'react';
-import { useMutation } from '@/hooks/UseMutation';
-import Cookies from 'js-cookie';
+import { useState } from "react";
+import Cookies from "js-cookie";
+import { useMutation } from "@/hooks/UseMutation";
 
-const SubmitPost = ({ onPostSubmit }) => {
-  const [description, setDescription] = useState('');
+function SubmitPost({ onPostSubmit }) {
+  const [description, setDescription] = useState("");
   const { mutate } = useMutation();
 
   const handlePostSubmit = async () => {
     try {
       const response = await mutate({
-        url: 'https://paace-f178cafcae7b.nevacloud.io/api/post',
+        url: "https://paace-f178cafcae7b.nevacloud.io/api/post",
         headers: {
           Authorization: `Bearer ${Cookies.get("user_token")}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         payload: { description },
       });
@@ -22,7 +22,7 @@ const SubmitPost = ({ onPostSubmit }) => {
         onPostSubmit(response);
       }
     } catch (error) {
-      console.error('Error submitting post:', error);
+      console.error("Error submitting post:", error);
     }
   };
 
@@ -33,8 +33,9 @@ const SubmitPost = ({ onPostSubmit }) => {
         onChange={(e) => setDescription(e.target.value)}
         placeholder="What's on your mind?"
         className="w-full h-20 p-2 border rounded-md resize-none text-black"
-      ></textarea>
+      />
       <button
+        type="submit"
         onClick={handlePostSubmit}
         className="bg-blue-500 text-white px-4 py-2 mt-2 rounded-md"
       >
@@ -42,6 +43,6 @@ const SubmitPost = ({ onPostSubmit }) => {
       </button>
     </div>
   );
-};
+}
 
 export default SubmitPost;
