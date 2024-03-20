@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { FormControl, Label } from "flowbite-react";
+import { Label } from "flowbite-react";
 import Cookies from "js-cookie";
 import Link from "next/link";
 import { useMutation } from "@/hooks/UseMutation";
@@ -41,7 +41,7 @@ function LoginPage() {
             <div>
               <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Login</h2>
             </div>
-            <FormControl onSubmit={handleSubmit} className="mt-8 space-y-6">
+            <form onSubmit={handleSubmit} className="mt-8 space-y-6">
               <div>
                 <Label htmlFor="email" className="block text-sm font-medium text-gray-700">Username</Label>
                 <input
@@ -79,7 +79,7 @@ function LoginPage() {
                   </Link>
                 </p>
               </div>
-            </FormControl>
+            </form>
           </div>
         </div>
       </Layout>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { toast, ToastContainer } from "react-toastify";
-import { FormControl, Label } from "flowbite-react";
+import { Label } from "flowbite-react";
 import { useMutation } from "@/hooks/UseMutation";
 import "react-toastify/dist/ReactToastify.css";
 import Layout from "@/components/Layout";
@@ -47,7 +47,7 @@ function RegisterPage() {
           <div>
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Register</h2>
           </div>
-          <FormControl onSubmit={handleSubmit} className="mt-8 space-y-6">
+          <form onSubmit={handleSubmit} className="mt-8 space-y-6">
             <div>
               <Label htmlFor="name" className="block text-sm font-medium text-gray-700">
                 Name
@@ -121,7 +121,7 @@ function RegisterPage() {
                 Register
               </button>
             </div>
-          </FormControl>
+          </form>
         </div>
       </div>
       <ToastContainer />
